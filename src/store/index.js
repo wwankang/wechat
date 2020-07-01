@@ -31,7 +31,6 @@ const store = new Vuex.Store({
     },
     // 页面推送消息
     SEND_MESSAGE(state, { content, success }) {
-      debugger;
       let session = state.sessions.find(
         item => item.id === state.currentSessionId
       );
@@ -61,7 +60,6 @@ const store = new Vuex.Store({
     },
     // 创建会话
     NEW_SESSION(state, id) {
-      debugger;
       let session = state.sessions.find(item => item.id === id);
       if (session) {
         state.currentSessionId = id;
@@ -79,6 +77,37 @@ const store = new Vuex.Store({
         lastTime: new Date()
       });
       state.currentSessionId = id;
+    },
+    //收到消息
+    RECV_MESSAGE(state, obj) {
+      let session = state.sessions.find(
+        item => item.user.username === obj.name
+      );
+      if (session) {
+        console.log("收到消息会话存在-用户:" + session.user.username);
+        session.messages.push({
+          content: obj.msg,
+          date: new Date()
+        });
+        session.lastMsg = obj.msg;
+        session.lastTime = new Date();
+        return;
+      }
+
+      console.log("选中会话不存在-用户:" + state.friends.username + "创建会话");
+      const friend = state.friends.find(friend => friend.username === obj.name);
+      state.sessions.push({
+        id: friend.id,
+        messages: [
+          {
+            content: obj.msg,
+            date: new Date()
+          }
+        ],
+        user: friend,
+        lastMsg: obj.msg,
+        lastTime: new Date()
+      });
     },
     // 选择会话
     SELECT_SESSION(state, id) {

@@ -90,7 +90,6 @@ export default {
       this.loading = true;
       // const that = this
 
-      debugger;
       if (this.formData.username === "" || this.formData.password === "") {
         const toast = document.getElementById("toast");
         if (toast.style.display !== "none") return;

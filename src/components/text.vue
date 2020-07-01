@@ -26,7 +26,6 @@ export default {
   },
   methods: {
     sendMessage(content) {
-      debugger;
       if (this.websocket.readyState === 1) {
         // 发送消息
         var socketMsg = { msg: content, toUser: this.session.user.username };
@@ -71,6 +70,7 @@ export default {
       // 接收到消息的回调方法
       const that = this;
       this.websocket.onmessage = function(event) {
+        debugger;
         const object = JSON.parse(event.data);
         console.log(object);
         if (object.type === 0) {
@@ -79,11 +79,8 @@ export default {
         }
         if (object.type === 1) {
           // 显示消息
-          console.log("接受消息");
-          that.session.messages.push({
-            content: object.msg,
-            date: new Date()
-          });
+          console.log("收到消息!");
+          that.$store.commit("RECV_MESSAGE", object);
         }
       };
       // 连接关闭的回调方法

@@ -31,7 +31,6 @@ export default {
       reader.readAsDataURL(file);
     },
     showUserInfo(e) {
-      debugger;
       const userInfo = document.getElementById("userInfo");
       if (userInfo.style.display !== "none") return;
       userInfo.style.left = e.x + "px";

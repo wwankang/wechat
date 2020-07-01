@@ -56,7 +56,6 @@ export default {
       this.$store.commit("SELECT_SESSION", id);
     },
     to(id) {
-      debugger;
       this.tabs.forEach(function(tab) {
         if (tab.index === id) {
           tab.active = true;

@@ -27,7 +27,7 @@ export default {
     <div class="main">
       <toolbar></toolbar>
       <message v-if="currentId"></message>
-      <send-text v-if="currentId"></send-text>
+      <send-text v-show="currentId"></send-text>
     </div>
   </div>
 </template>
