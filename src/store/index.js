@@ -149,10 +149,7 @@ store.watch(
   state => state.sessions,
   val => {
     console.log("CHANGE: ", val);
-    localStorage.setItem(
-      "chat-session" + this.$store.user.id,
-      JSON.stringify(val)
-    );
+    localStorage.setItem("chat-session", JSON.stringify(val));
   },
   {
     deep: true
