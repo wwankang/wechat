@@ -80,7 +80,7 @@ export default {
       />
     </footer>
     <v-contextmenu ref="contextmenu" theme="dark">
-      <v-contextmenu-item @click="logout">退出登录</v-contextmenu-item>
+      <v-contextmenu-item @click="logout">退出</v-contextmenu-item>
     </v-contextmenu>
 
     <div
