@@ -57,7 +57,7 @@ export default {
       // 判断当前浏览器是否支持WebSocket
       if ("WebSocket" in window) {
         this.websocket = new WebSocket(
-          "ws://localhost:8888/websocket/" + this.user.username
+          "ws://115.28.130.238:8888/websocket/" + this.user.username
         );
       } else {
         alert("不支持建立socket连接");
