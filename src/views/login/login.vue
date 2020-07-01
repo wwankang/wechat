@@ -52,8 +52,12 @@
         </div>
       </div>
       <div class="weui-form__opr-area">
-        <a class="weui-btn weui-btn_default weui-btn_loading" @click="submit"
-          ><i v-show="loading" class="weui-loading"></i>确定</a
+        <a
+          id="loginBtn"
+          class="weui-btn weui-btn_default weui-btn_loading"
+          @click="submit"
+          ><i id="loading" style="display: none" class="weui-loading"></i
+          >确定</a
         >
       </div>
     </div>
@@ -77,8 +81,6 @@ export default {
         username: "",
         password: ""
       },
-      // 点击确认后按钮正在加载
-      loading: false,
       msg: ""
     };
   },
@@ -89,7 +91,10 @@ export default {
       // 加载中
       this.loading = true;
       // const that = this
+      let loading = document.getElementById("loading");
+      loading.style.display = "";
 
+      debugger;
       if (this.formData.username === "" || this.formData.password === "") {
         const toast = document.getElementById("toast");
         if (toast.style.display !== "none") return;
@@ -98,7 +103,7 @@ export default {
         setTimeout(function() {
           toast.style.display = "none";
         }, 1000);
-        this.loading = false;
+        loading.style.display = "none";
         return;
       }
 
@@ -108,7 +113,7 @@ export default {
           this.$router.push("/index");
         })
         .catch(() => {});
-      this.loading = false;
+      loading.style.display = "none";
     }
   }
 };
