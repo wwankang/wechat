@@ -81,6 +81,21 @@ export default {
           // 显示消息
           console.log("收到消息!");
           that.$store.commit("RECV_MESSAGE", object);
+          if (window.Notification && Notification.permission !== "denied") {
+            Notification.requestPermission(function() {
+              const friend = that.$store.state.friends.find(
+                friend => friend.username === object.name
+              );
+              const options = {
+                body: object.msg,
+                icon: friend.img
+              };
+              const notice = new Notification(friend.username, options);
+              notice.onclick = function() {
+                that.$store.state.currentSessionId = friend.id;
+              };
+            });
+          }
         }
       };
       // 连接关闭的回调方法
